@@ -21,7 +21,10 @@ function getShoppingList(id) {
 }
 
 function getInstructions(id) {
-  return db
-  .select()
-  .from("recipes");
+  return db("steps")
+  .select("step_number", "step_name")
+  .join("recipes", "recipes.id", "=", "steps.recipe_id")
+  .where("recipes.id", id)
+  .orderBy("steps.step_number")
+  ;
 }
