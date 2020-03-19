@@ -11,22 +11,17 @@ function getRecipes() {
 }
 
 function getShoppingList(id) {
-  return db
-    .select("ingredient_name", "ingredient_qty")
-    .from("recipes")
+  return db("recipes")
+    .select("ingredient_name")
+    .sum({ingredient_qty: "ingredient_qty"})
     .join("steps", "steps.recipe_id", "=", "recipes.id")
     .join("ingredients", "ingredients.id", "=", "steps.ingredient_id")
-    .where("recipes.id", id);
+    .where("recipes.id", id)
+    .groupBy("ingredients.ingredient_name");
 }
 
-// select ingredient_qty, ingredient_name
-// from recipes as r
-// join steps as s
-//     on s.recipe_id = r.id
-// join ingredients as i
-//     on i.id = s.ingredient_id
-// where r.id = 2
-
-function getInstructions(recipe_id) {
-  return db("recipes");
+function getInstructions(id) {
+  return db
+  .select()
+  .from("recipes");
 }
