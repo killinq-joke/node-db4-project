@@ -13,7 +13,7 @@ function getRecipes() {
 function getShoppingList(id) {
   return db("recipes")
     .select("ingredient_name")
-    .sum({ingredient_qty: "ingredient_qty"})
+    .sum({ ingredient_qty: "ingredient_qty" })
     .join("steps", "steps.recipe_id", "=", "recipes.id")
     .join("ingredients", "ingredients.id", "=", "steps.ingredient_id")
     .where("recipes.id", id)
@@ -22,9 +22,8 @@ function getShoppingList(id) {
 
 function getInstructions(id) {
   return db("steps")
-  .select("step_number", "step_name")
-  .join("recipes", "recipes.id", "=", "steps.recipe_id")
-  .where("recipes.id", id)
-  .orderBy("steps.step_number")
-  ;
+    .select("step_number", "step_name")
+    .join("recipes", "recipes.id", "=", "steps.recipe_id")
+    .where("recipes.id", id)
+    .orderBy("steps.step_number");
 }

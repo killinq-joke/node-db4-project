@@ -1,14 +1,14 @@
-const db = require("../data/db-config")
+const db = require("../data/db-config");
 
 module.exports = {
-    getIngredients,
-    getRecipesByIngredients
-}
+  getIngredients,
+  getRecipesByIngredients
+};
 
 function getIngredients() {
-    return db("ingredients")
+  return db("ingredients");
 }
 
 function getRecipesByIngredients(ingredient_id) {
-    return db("ingredients")
+  return db("ingredients");
 }
